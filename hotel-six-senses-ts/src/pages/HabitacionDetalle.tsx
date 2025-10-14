@@ -1,10 +1,9 @@
 import { useParams } from "react-router-dom";
 import { habitaciones } from "@/data/habitaciones";
-import { useEffect } from "react";
 import { useAppContext } from "@/context/AppContext";
 import { useNavigate } from "react-router-dom";
 import type { Habitacion } from "@/data/habitaciones";
-
+import { useScrollToTop } from "@/hooks/useScrollToTop";
 
 /* useParams para obtener los datos dinamicos de la url */
 const HabitacionDetalles = () => {
@@ -15,9 +14,7 @@ const HabitacionDetalles = () => {
     const navigate = useNavigate();
 
     /* reset de scroll para cuando entre en una hab individual no este el scroll bajo */
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [])
+    useScrollToTop();
 
     if (!habitacion) return <p>habitación no encontrada</p>;
 
