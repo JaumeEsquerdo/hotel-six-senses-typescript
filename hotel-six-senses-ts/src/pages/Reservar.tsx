@@ -15,8 +15,10 @@ const Reservar = () => {
     tomorrow.setDate(today.getDate() + 1); // añadir un dia mas (para q sea mañana claro)
     const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([today, tomorrow])
     const [checkIn, checkOut] = dateRange;
-    // const [checkOut, setCheckOut] = useState<Date>(tomorrow);
-
+    const [showModal, setShowModal] = useState(false);
+    const [numberGuests, setNumberGuests] = useState<number>(1)
+    const [nameGuest, setNameGuest] = useState<string>("")
+    const [emailGuest, setEmailGuest] = useState<string>("")
     /*
         en los onChange se pone `onChange={(date: Date | null) => date && setCheckIn(date)}` porque DatePicker puede devolver null si el usuario borra la fecha. Así comprobamos que date no es null antes de llamar a setCheckIn o setCheckOut. Si no lo hacemos, TS nos da error porque setCheckIn y setCheckOut esperan un Date, no un Date | null.
      */
@@ -24,9 +26,18 @@ const Reservar = () => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log({ checkIn });
+        setShowModal(true)
     }
 
+    const handleCloseModal = () => {
+        setShowModal(false)
+        setSelectedRoom("")
+        setDateRange([today, tomorrow])
+        setNumberGuests(1)
+        setNameGuest("")
+        setEmailGuest("")
+
+    }
     /* reset de scroll para cuando entre en una hab individual no este el scroll bajo */
     useScrollToTop();
 
@@ -38,11 +49,11 @@ const Reservar = () => {
                 <h2 className="Booking-title">reserva tu experiencia en Six Senses Ibiza</h2>
                 <form className="Booking-form" onSubmit={handleSubmit}>
                     <label className="Booking-label">nombre completo
-                        <input className="Booking-input" type="text" name="name" placeholder="Ana García López"
+                        <input value={nameGuest} onChange={(e) => setNameGuest(e.target.value)} className="Booking-input" type="text" name="name" placeholder="Ana García López"
                             required /></label>
 
                     <label className="Booking-label">email
-                        <input className="Booking-input" type="email" name="email" placeholder="ejemplo@correo.com" required /></label>
+                        <input className="Booking-input" value={emailGuest} onChange={(e) => setEmailGuest(e.target.value)} type="email" name="email" placeholder="ejemplo@correo.com" required /></label>
 
                     <label className="Booking-label">tipo de habitación
                         <select
@@ -67,10 +78,24 @@ const Reservar = () => {
                     </label>
 
                     <label className="Booking-label">personas
-                        <input defaultValue={1} className="Booking-input" type="number" name="guests" min="1" max="10" required /></label>
+                        <input className="Booking-input" type="number"
+                            value={numberGuests}
+                            onChange={(e) => setNumberGuests(e.target.valueAsNumber || 1)
+                            }
+                            name="guests" min="1" max="10" required /></label>
 
                     <button className="Booking-btn" type="submit">confirmar reserva</button>
                 </form>
+                {showModal && (
+                    <div className="Booking-modal">
+                        <h2>¡Enhorabuena {nameGuest}, has completado tu reserva en Six Senses!</h2>
+                        <p>Fechas de la reserva: <span>{checkIn?.toLocaleDateString()} {checkOut?.toLocaleDateString()}</span></p>
+                        <p>Te hemos enviado los datos de confirmación a {emailGuest}</p>
+                        <button onClick={handleCloseModal}>Cerrar</button>
+
+
+                    </div>
+                )}
             </div>
 
             <div className="Booking-info">
