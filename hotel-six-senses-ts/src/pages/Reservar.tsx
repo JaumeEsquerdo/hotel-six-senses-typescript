@@ -12,9 +12,9 @@ const Reservar = () => {
     const today = new Date();
     const tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1); // añadir un dia mas (para q sea mañana claro)
-
-    const [checkIn, setCheckIn] = useState<Date>(today);
-    const [checkOut, setCheckOut] = useState<Date>(tomorrow);
+    const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([today, tomorrow])
+    const [checkIn, checkOut] = dateRange;
+    // const [checkOut, setCheckOut] = useState<Date>(tomorrow);
 
     /*
         en los onChange se pone `onChange={(date: Date | null) => date && setCheckIn(date)}` porque DatePicker puede devolver null si el usuario borra la fecha. Así comprobamos que date no es null antes de llamar a setCheckIn o setCheckOut. Si no lo hacemos, TS nos da error porque setCheckIn y setCheckOut esperan un Date, no un Date | null.
@@ -23,7 +23,7 @@ const Reservar = () => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log({ checkIn, checkOut });
+        console.log({ checkIn });
     }
 
     /* reset de scroll para cuando entre en una hab individual no este el scroll bajo */
@@ -56,16 +56,14 @@ const Reservar = () => {
                             ))}
                         </select>
                     </label>
-                    <label className="Booking-label">fecha de entrada
+                    <label className="Booking-label">fechas de estancia
                         <DatePicker
+                            selectsRange
+                            startDate={checkIn}
+                            endDate={checkOut}
                             dateFormat="dd/MM/yyyy"
-                            minDate={today} selected={checkIn} onChange={(date: Date | null) => date && setCheckIn(date)} className="datepicker Booking-date" /></label>
-
-                    <label className="Booking-label">fecha de salida
-                        <DatePicker
-                            dateFormat="dd/MM/yyyy"
-
-                            minDate={today} selected={checkOut} onChange={(date: Date | null) => date && setCheckOut(date)} className="datepicker Booking-date" /></label>
+                            minDate={today} selected={checkIn} onChange={(update: [Date | null, Date | null]) => setDateRange(update)} className="datepicker Booking-date" />
+                    </label>
 
                     <label className="Booking-label">personas
                         <input defaultValue={1} className="Booking-input" type="number" name="guests" min="1" max="10" required /></label>
