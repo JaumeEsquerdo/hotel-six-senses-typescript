@@ -96,7 +96,7 @@
   left: 50%;
   min-height: 300px;
   transform: translate(-50%, -50%);
-  background-color: #faf6d7;
+  background-color: #fbfaf3;
   padding: 2rem;
   box-shadow: 0 4px 8px rgba(43, 37, 37, 0);
   border: 1.8px solid #2f3e2e;
@@ -107,7 +107,8 @@
 .Booking-titleModal {
   margin-bottom: 1.5rem;
 }
-.Booking-dateModal {
+.Booking-dateModal,
+.Booking-emailModal {
   font-weight: 600;
 }
 .Booking-textModal {

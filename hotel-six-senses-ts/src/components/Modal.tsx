@@ -12,7 +12,7 @@ const Modal = ({ nameGuest, checkIn, checkOut, handleCloseModal, emailGuest }: M
         <div className="Booking-modal">
             <h2 className="Booking-titleModal">¡Enhorabuena {nameGuest}, has completado tu reserva en Six Senses!</h2>
             <p className="Booking-textModal">Fechas de la reserva del <span className="Booking-dateModal">{checkIn?.toLocaleDateString()}</span> al <span className="Booking-dateModal">{checkOut?.toLocaleDateString()}</span></p>
-            <p className="Booking-textModal">Te hemos enviado los datos de confirmación a {emailGuest}</p>
+            <p className="Booking-textModal">Te hemos enviado los datos de confirmación a <span className="Booking-emailModal">{emailGuest}</span></p>
             <button className="Booking-btn" onClick={handleCloseModal}>Cerrar</button>
         </div>
     );
