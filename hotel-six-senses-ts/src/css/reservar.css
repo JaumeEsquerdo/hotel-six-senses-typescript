@@ -94,13 +94,24 @@
   position: fixed;
   top: 50%;
   left: 50%;
+  min-height: 300px;
   transform: translate(-50%, -50%);
   background-color: #fff;
   padding: 2rem;
   box-shadow: 0 4px 8px rgba(43, 37, 37, 0);
-  border-radius: 0.5rem;
+  border: 1.8px solid #2f3e2e;
   z-index: 20;
   text-align: center;
+  align-content: center;
+}
+.Booking-titleModal {
+  margin-bottom: 1.5rem;
+}
+.Booking-dateModal {
+  font-weight: 600;
+}
+.Booking-textModal {
+  margin-bottom: 1rem;
 }
 /* ========================================
    React Datepicker - Estilos personalizados
