@@ -6,6 +6,7 @@ import "@/css/reservar.css"
 import { habitaciones } from "@/data/habitaciones";
 import { useAppContext } from "@/context/AppContext";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
+import Modal from "@/components/Modal";
 
 const Reservar = () => {
     const { selectedRoom, setSelectedRoom } = useAppContext();
@@ -87,14 +88,7 @@ const Reservar = () => {
                     <button className="Booking-btn" type="submit">confirmar reserva</button>
                 </form>
                 {showModal && (
-                    <div className="Booking-modal">
-                        <h2 className="Booking-titleModal">¡Enhorabuena {nameGuest}, has completado tu reserva en Six Senses!</h2>
-                        <p className="Booking-textModal">Fechas de la reserva del <span className="Booking-dateModal">{checkIn?.toLocaleDateString()}</span> al <span className="Booking-dateModal">{checkOut?.toLocaleDateString()}</span></p>
-                        <p className="Booking-textModal">Te hemos enviado los datos de confirmación a {emailGuest}</p>
-                        <button className="Booking-btn" onClick={handleCloseModal}>Cerrar</button>
-
-
-                    </div>
+                    <Modal nameGuest={nameGuest} checkIn={checkIn} checkOut={checkOut} handleCloseModal={handleCloseModal} emailGuest={emailGuest} />
                 )}
             </div>
 
