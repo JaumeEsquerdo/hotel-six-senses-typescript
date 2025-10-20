@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+import "@/css/reservar.css"
 import { habitaciones } from "@/data/habitaciones";
 import { useAppContext } from "@/context/AppContext";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
