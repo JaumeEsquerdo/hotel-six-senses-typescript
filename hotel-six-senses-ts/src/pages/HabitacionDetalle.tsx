@@ -10,7 +10,7 @@ const HabitacionDetalles = () => {
     const { id } = useParams<{ id: string }>();
     const habitacion: Habitacion | undefined = habitaciones.find(h => h.id === id)
 
-    const { setSelectedRoom } = useAppContext();
+    const { setSelectedRoom, setPriceRoom } = useAppContext();
     const navigate = useNavigate();
 
     /* reset de scroll para cuando entre en una hab individual no este el scroll bajo */
@@ -20,6 +20,7 @@ const HabitacionDetalles = () => {
 
     const reservarHabitacion = (): void => {
         setSelectedRoom(habitacion.id);
+        setPriceRoom(habitacion.price);
         navigate("/reservar");
     };
 
@@ -48,6 +49,10 @@ const HabitacionDetalles = () => {
                     <div className="HabitacionDetalle-detalle">
                         <p className="HabitacionDetalle-titulo">datos clave</p>
                         <p className="HabitacionDetalle-titulo">{habitacion.datos}</p>
+                    </div>
+                    <div className="HabitacionDetalle-detalle">
+                        <p className="HabitacionDetalle-titulo">precio por día</p>
+                        <p className="HabitacionDetalle-titulo">{habitacion.price}€</p>
                     </div>
 
                     <div className="HabitacionDetalle-detalle">

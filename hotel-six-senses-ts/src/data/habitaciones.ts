@@ -7,6 +7,8 @@ export interface Habitacion {
   default: string;
   hover: string;
   size: "tall" | "medium" | "wide";
+  price: number;
+  numeroMaximoPersonas?: number;
 }
 
 export const habitaciones: Habitacion[] = [
@@ -34,6 +36,8 @@ export const habitaciones: Habitacion[] = [
     default: "/imgs/habitaciones/cave-royal.webp",
     hover: "/imgs/habitaciones/cave-royal-2.webp",
     size: "tall",
+    price: 200,
+    numeroMaximoPersonas: 3,
   },
 
   {
@@ -58,6 +62,8 @@ export const habitaciones: Habitacion[] = [
     default: "/imgs/habitaciones/hab-deluxe-2.webp",
     hover: "/imgs/habitaciones/hab-deluxe.webp",
     size: "wide",
+    price: 180,
+    numeroMaximoPersonas: 2,
   },
 
   {
@@ -82,6 +88,8 @@ export const habitaciones: Habitacion[] = [
     default: "/imgs/habitaciones/sea-scape-room.webp",
     hover: "/imgs/habitaciones/sea-scape-room-2.webp",
     size: "medium",
+    price: 220,
+    numeroMaximoPersonas: 3,
   },
 
   {
@@ -106,6 +114,8 @@ export const habitaciones: Habitacion[] = [
     default: "/imgs/habitaciones/sea-view-junior-2.webp",
     hover: "/imgs/habitaciones/sea-view-junior.webp",
     size: "tall",
+    price: 200,
+    numeroMaximoPersonas: 2,
   },
 
   {
@@ -134,6 +144,8 @@ export const habitaciones: Habitacion[] = [
     default: "/imgs/habitaciones/ten-mansion-2.webp",
     hover: "/imgs/habitaciones/ten-mansion.webp",
     size: "wide",
+    price: 1000,
+    numeroMaximoPersonas: 20,
   },
 
   {
@@ -158,5 +170,7 @@ export const habitaciones: Habitacion[] = [
     default: "/imgs/habitaciones/xarraca-room-2.webp",
     hover: "/imgs/habitaciones/xarraca-room.webp",
     size: "medium",
+    price: 400,
+    numeroMaximoPersonas: 5,
   },
 ];

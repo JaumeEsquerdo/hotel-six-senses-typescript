@@ -6,6 +6,8 @@ type AppContextType = {
     setIsMenuOpen: (isMenuOpen: boolean) => void
     selectedRoom: string | null
     setSelectedRoom: (room: string | null) => void
+    priceRoom: number | null
+    setPriceRoom: (price: number | null) => void
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -17,19 +19,19 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false); //abrir / cerrar menu
     const [selectedRoom, setSelectedRoom] = useState<string | null>(null); // aññadir hab a la reserva
-
+    const [priceRoom, setPriceRoom] = useState<number | null>(null);
 
 
 
     return (
         <AppContext.Provider
             value={{
-
                 isMenuOpen,
                 setIsMenuOpen,
                 selectedRoom,
                 setSelectedRoom,
-
+                priceRoom,
+                setPriceRoom
             }}
         >
             {children}

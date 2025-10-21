@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -9,7 +9,7 @@ import { useScrollToTop } from "@/hooks/useScrollToTop";
 import Modal from "@/components/Modal";
 
 const Reservar = () => {
-    const { selectedRoom, setSelectedRoom } = useAppContext();
+    const { selectedRoom, setSelectedRoom, priceRoom, setPriceRoom } = useAppContext();
 
     const today = new Date();
     const tomorrow = new Date();
@@ -20,9 +20,25 @@ const Reservar = () => {
     const [numberGuests, setNumberGuests] = useState<number>(1)
     const [nameGuest, setNameGuest] = useState<string>("")
     const [emailGuest, setEmailGuest] = useState<string>("")
+    const selectedRoomData = habitaciones.find(hab => hab.id === selectedRoom);
     /*
-        en los onChange se pone `onChange={(date: Date | null) => date && setCheckIn(date)}` porque DatePicker puede devolver null si el usuario borra la fecha. Así comprobamos que date no es null antes de llamar a setCheckIn o setCheckOut. Si no lo hacemos, TS nos da error porque setCheckIn y setCheckOut esperan un Date, no un Date | null.
-     */
+    en los onChange se pone `onChange={(date: Date | null) => date && setCheckIn(date)}` porque DatePicker puede devolver null si el usuario borra la fecha. Así comprobamos que date no es null antes de llamar a setCheckIn o setCheckOut. Si no lo hacemos, TS nos da error porque setCheckIn y setCheckOut esperan un Date, no un Date | null.
+    */
+
+    const getNumberOfDays = (start: Date | null, end: Date | null): number => {
+        if (!start || !end) return 0;
+        const startDate = new Date(start);
+        const endDate = new Date(end);
+        startDate.setHours(0, 0, 0, 0);
+        endDate.setHours(0, 0, 0, 0);
+        const diffTime = endDate.getTime() - startDate.getTime();
+        const diffDays = diffTime / (1000 * 60 * 60 * 24);
+        return Math.round(diffDays)
+
+    };
+    const days = getNumberOfDays(checkIn, checkOut);
+    const totalPrice = priceRoom && days ? priceRoom * days : 0;
+
 
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -37,8 +53,26 @@ const Reservar = () => {
         setNumberGuests(1)
         setNameGuest("")
         setEmailGuest("")
-
     }
+
+    // limitar el numero de personas al maximo permitido por habitacion
+    useEffect(() => {
+        if (!selectedRoomData) return;
+
+        if (selectedRoomData.numeroMaximoPersonas && numberGuests > selectedRoomData.numeroMaximoPersonas) {
+            setNumberGuests(selectedRoomData.numeroMaximoPersonas);
+        }
+    }, [selectedRoom, numberGuests, selectedRoomData])
+
+    // asingar el precio de la habtacion seleccionada
+    useEffect(() => {
+        if (!selectedRoomData) {
+            setPriceRoom(0);
+            return;
+        }
+        setPriceRoom(selectedRoomData.price)
+    }, [selectedRoom, selectedRoomData, setPriceRoom])
+
     /* reset de scroll para cuando entre en una hab individual no este el scroll bajo */
     useScrollToTop();
 
@@ -83,7 +117,11 @@ const Reservar = () => {
                             value={numberGuests}
                             onChange={(e) => setNumberGuests(e.target.valueAsNumber || 1)
                             }
-                            name="guests" min="1" max="10" required /></label>
+                            name="guests" min={1} max={selectedRoomData ? selectedRoomData.numeroMaximoPersonas : 10} required /></label>
+
+                    <p>
+                        precio total: {totalPrice}€
+                    </p>
 
                     <button className="Booking-btn" type="submit">confirmar reserva</button>
                 </form>
