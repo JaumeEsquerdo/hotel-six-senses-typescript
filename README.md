@@ -88,6 +88,9 @@ Guarda y muestra la habitación seleccionada desde el contexto.
 
 Incluye información adicional sobre el hotel y contacto.
 
+➡️ Al confirmar la reserva, se abre un modal de “reserva completada” que muestra los datos de la reserva, simulando la compra final.
+Si el modal se cierra, el formulario y el contexto se reinician, dejando la aplicación lista para una nueva reserva.
+
 - Extras
 
 Se hace un scrollTo(0, 0) en cada página con useEffect para que al entrar empiece desde arriba.
