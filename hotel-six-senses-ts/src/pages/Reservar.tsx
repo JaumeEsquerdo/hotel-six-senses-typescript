@@ -20,6 +20,8 @@ const Reservar = () => {
     const [numberGuests, setNumberGuests] = useState<number>(1)
     const [nameGuest, setNameGuest] = useState<string>("")
     const [emailGuest, setEmailGuest] = useState<string>("")
+    const [acceptTerms, setAcceptTerms] = useState<boolean>(false);
+    const [showTermsTooltip, setShowTermsTooltip] = useState<boolean>(false)
     const selectedRoomData = habitaciones.find(hab => hab.id === selectedRoom);
     /*
     en los onChange se pone `onChange={(date: Date | null) => date && setCheckIn(date)}` porque DatePicker puede devolver null si el usuario borra la fecha. Así comprobamos que date no es null antes de llamar a setCheckIn o setCheckOut. Si no lo hacemos, TS nos da error porque setCheckIn y setCheckOut esperan un Date, no un Date | null.
@@ -119,14 +121,32 @@ const Reservar = () => {
                             }
                             name="guests" min={1} max={selectedRoomData ? selectedRoomData.numeroMaximoPersonas : 10} required /></label>
 
-                    <p>
-                        precio total: {totalPrice}€
+                    <p className="Booking-text">
+                        precio total: <span className="Booking-priceModal">{totalPrice}</span>€
                     </p>
+                    <label className="Booking-label Booking-label--terms">
+                        <input className="Booking-input Booking-input--terms" type="checkbox"
+                            checked={acceptTerms}
+                            onChange={(e) => setAcceptTerms(e.target.checked)
+                            }
+                            required />
+                        Al confirmar la reserva, acepto los <span onMouseEnter={() => setShowTermsTooltip(true)} onMouseLeave={() => setShowTermsTooltip(false)} className={`Booking-terms`}>términos y condiciones
+                            {showTermsTooltip && (
+                                <div className="Booking-termsTooltip">
+                                    <p className="Booking-text">
+                                        Al confirmar la reserva, aceptas nuestras políticas de cancelación, privacidad y condiciones de uso. Esto incluye la autorización para procesar tus datos personales, las normas de pago y las posibles modificaciones de horarios o servicios del hotel. Por favor, lee detenidamente estas condiciones antes de continuar con la reserva.
+                                    </p>
+                                </div>
+                            )}
+                        </span>.
+                    </label>
+
+
 
                     <button className="Booking-btn" type="submit">confirmar reserva</button>
                 </form>
                 {showModal && (
-                    <Modal nameGuest={nameGuest} checkIn={checkIn} checkOut={checkOut} handleCloseModal={handleCloseModal} emailGuest={emailGuest} />
+                    <Modal nameGuest={nameGuest} checkIn={checkIn} checkOut={checkOut} handleCloseModal={handleCloseModal} emailGuest={emailGuest} totalPrice={totalPrice} />
                 )}
             </div>
 

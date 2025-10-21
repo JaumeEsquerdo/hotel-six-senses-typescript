@@ -26,6 +26,17 @@
   font-size: 1rem;
   color: #333;
 }
+.Booking-label--terms {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.Booking-text {
+  font-size: 1rem;
+  color: #333;
+}
 
 .Booking-input,
 .Booking-date {
@@ -37,6 +48,27 @@
   background: transparent;
   outline: none;
   color: #555;
+}
+.Booking-input--terms {
+  width: auto;
+  margin-top: 0;
+}
+.Booking-terms {
+  position: relative;
+  font-weight: 600;
+  cursor: pointer;
+}
+.Booking-termsTooltip {
+  position: absolute;
+  padding: 20px;
+  min-width: 400px;
+  width: auto;
+  background-color: #fbfaf3;
+  bottom: 140%;
+  left: 40%;
+  display: flex;
+  border: 1.8px solid #2f3e2e;
+  z-index: 10;
 }
 
 .Booking-date {
@@ -86,8 +118,12 @@
 
 .Booking-btn:hover {
   background-color: rgba(70, 105, 85, 0.35);
-  transform: translateY(-2px);
+  transform: translateY(-4px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.Booking-btn:active {
+  transform: translate(0);
+  box-shadow: none;
 }
 
 .Booking-modal {
@@ -108,8 +144,10 @@
   margin-bottom: 1.5rem;
 }
 .Booking-dateModal,
-.Booking-emailModal {
+.Booking-emailModal,
+.Booking-priceModal {
   font-weight: 600;
+  color: #333;
 }
 .Booking-textModal {
   margin-bottom: 1rem;
