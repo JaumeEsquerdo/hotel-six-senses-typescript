@@ -55,6 +55,7 @@ const Reservar = () => {
         setNumberGuests(1)
         setNameGuest("")
         setEmailGuest("")
+        setAcceptTerms(false)
     }
 
     // limitar el numero de personas al maximo permitido por habitacion
