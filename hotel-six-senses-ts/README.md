@@ -8,9 +8,9 @@ Esta aplicación es una muestra funcional de lo que podría ser una página de r
 
 ### Repositorio y versión online
 
-[Repositorio Github](https://github.com/JaumeEsquerdo/proyecto-hotel-six-senses)
+[Repositorio Github](https://github.com/JaumeEsquerdo/hotel-six-senses-typescript)
 
-[Versión online desplegada en Vercel](https://proyecto-hotel-six-senses-ca2t.vercel.app/)
+[Versión online desplegada en Vercel](https://hotel-six-senses.vercel.app/)
 
 ### 🧱 Tech stack
 
