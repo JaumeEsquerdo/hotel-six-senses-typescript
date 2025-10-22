@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { FormEvent } from "react";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -7,7 +7,9 @@ import { habitaciones } from "@/data/habitaciones";
 import { useAppContext } from "@/context/AppContext";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import Modal from "@/components/Modal";
-import { useLimitGUests } from "@/hooks/useLimitGuests";
+import { useLimitGuests } from "@/hooks/useLimitGuests";
+import type { Habitacion } from "@/data/habitaciones";
+import { useRoomPriceSelected } from "@/hooks/useRoomPriceSelected";
 
 const Reservar = () => {
     const { selectedRoom, setSelectedRoom, priceRoom, setPriceRoom } = useAppContext();
@@ -23,7 +25,7 @@ const Reservar = () => {
     const [emailGuest, setEmailGuest] = useState<string>("")
     const [acceptTerms, setAcceptTerms] = useState<boolean>(false);
     const [showTermsTooltip, setShowTermsTooltip] = useState<boolean>(false)
-    const selectedRoomData = habitaciones.find(hab => hab.id === selectedRoom);
+    const selectedRoomData: Habitacion | undefined = habitaciones.find(hab => hab.id === selectedRoom);
     /*
     en los onChange se pone `onChange={(date: Date | null) => date && setCheckIn(date)}` porque DatePicker puede devolver null si el usuario borra la fecha. Así comprobamos que date no es null antes de llamar a setCheckIn o setCheckOut. Si no lo hacemos, TS nos da error porque setCheckIn y setCheckOut esperan un Date, no un Date | null.
     */
@@ -60,16 +62,10 @@ const Reservar = () => {
     }
 
     // Hook: limita el número de huéspedes según la capacidad máxima de la habitación seleccionada.
-    useLimitGUests({ selectedRoom, numberGuests, selectedRoomData, setNumberGuests });
+    useLimitGuests({ selectedRoom, numberGuests, selectedRoomData, setNumberGuests });
 
     // asingar el precio de la habtacion seleccionada
-    useEffect(() => {
-        if (!selectedRoomData) {
-            setPriceRoom(0);
-            return;
-        }
-        setPriceRoom(selectedRoomData.price)
-    }, [selectedRoom, selectedRoomData, setPriceRoom])
+    useRoomPriceSelected({ setPriceRoom, selectedRoom, selectedRoomData });
 
     /* reset de scroll para cuando entre en una hab individual no este el scroll bajo */
     useScrollToTop();

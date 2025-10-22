@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
-type AppContextType = {
+export type AppContextType = {
     isMenuOpen: boolean
     setIsMenuOpen: (isMenuOpen: boolean) => void
     selectedRoom: string | null

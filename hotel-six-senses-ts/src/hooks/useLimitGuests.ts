@@ -8,7 +8,7 @@ interface useLimitGuestsProps {
   selectedRoomData?: Habitacion;
   setNumberGuests: (value: number) => void;
 }
-export const useLimitGUests = ({
+export const useLimitGuests = ({
   selectedRoom,
   numberGuests,
   selectedRoomData,
