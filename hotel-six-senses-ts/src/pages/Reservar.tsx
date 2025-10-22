@@ -7,6 +7,7 @@ import { habitaciones } from "@/data/habitaciones";
 import { useAppContext } from "@/context/AppContext";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import Modal from "@/components/Modal";
+import { useLimitGUests } from "@/hooks/useLimitGuests";
 
 const Reservar = () => {
     const { selectedRoom, setSelectedRoom, priceRoom, setPriceRoom } = useAppContext();
@@ -58,14 +59,8 @@ const Reservar = () => {
         setAcceptTerms(false)
     }
 
-    // limitar el numero de personas al maximo permitido por habitacion
-    useEffect(() => {
-        if (!selectedRoomData) return;
-
-        if (selectedRoomData.numeroMaximoPersonas && numberGuests > selectedRoomData.numeroMaximoPersonas) {
-            setNumberGuests(selectedRoomData.numeroMaximoPersonas);
-        }
-    }, [selectedRoom, numberGuests, selectedRoomData])
+    // Hook: limita el número de huéspedes según la capacidad máxima de la habitación seleccionada.
+    useLimitGUests({ selectedRoom, numberGuests, selectedRoomData, setNumberGuests });
 
     // asingar el precio de la habtacion seleccionada
     useEffect(() => {
