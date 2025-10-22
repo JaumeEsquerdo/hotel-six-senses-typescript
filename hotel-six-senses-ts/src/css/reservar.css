@@ -275,4 +275,13 @@
     word-break: break-word;
     line-height: 1.4;
   }
+  .Booking-modal {
+    width: 90%;
+    padding: 1.2rem;
+  }
+  .Booking-termsTooltip {
+    min-width: 280px;
+    width: auto;
+    left: -140%;
+  }
 }
