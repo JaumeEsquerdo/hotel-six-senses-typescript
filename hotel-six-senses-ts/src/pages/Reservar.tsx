@@ -10,6 +10,7 @@ import Modal from "@/components/Modal";
 import { useLimitGuests } from "@/hooks/useLimitGuests";
 import type { Habitacion } from "@/data/habitaciones";
 import { useRoomPriceSelected } from "@/hooks/useRoomPriceSelected";
+import { FooterBooking } from "@/components/FooterBooking";
 
 const Reservar = () => {
     const { selectedRoom, setSelectedRoom, priceRoom, setPriceRoom } = useAppContext();
@@ -44,8 +45,6 @@ const Reservar = () => {
     const days = getNumberOfDays(checkIn, checkOut);
     const totalPrice = priceRoom && days ? priceRoom * days : 0;
 
-
-
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setShowModal(true)
@@ -61,6 +60,8 @@ const Reservar = () => {
         setAcceptTerms(false)
     }
 
+    const handleDateChange = (dates: [Date | null, Date | null]) => setDateRange(dates);
+
     // Hook: limita el número de huéspedes según la capacidad máxima de la habitación seleccionada.
     useLimitGuests({ selectedRoom, numberGuests, selectedRoomData, setNumberGuests });
 
@@ -72,8 +73,6 @@ const Reservar = () => {
 
     return (
         <>
-
-
             <div className="Booking-container">
                 <h2 className="Booking-title">reserva tu experiencia en Six Senses Ibiza</h2>
                 <form className="Booking-form" onSubmit={handleSubmit}>
@@ -103,7 +102,7 @@ const Reservar = () => {
                             startDate={checkIn}
                             endDate={checkOut}
                             dateFormat="dd/MM/yyyy"
-                            minDate={today} selected={checkIn} onChange={(update: [Date | null, Date | null]) => setDateRange(update)} className="datepicker Booking-date" />
+                            minDate={today} selected={checkIn} onChange={handleDateChange} className="datepicker Booking-date" />
                     </label>
 
                     <label className="Booking-label">personas
@@ -133,8 +132,6 @@ const Reservar = () => {
                         </span>.
                     </label>
 
-
-
                     <button className="Booking-btn" type="submit">confirmar reserva</button>
                 </form>
                 {showModal && (
@@ -142,28 +139,7 @@ const Reservar = () => {
                 )}
             </div>
 
-            <div className="Booking-info">
-                <div className="Booking-infoTextos">
-
-                    <h3>sobre el hotel</h3>
-                    <p>
-                        Six Senses Ibiza es un santuario en la costa norte de la isla, donde el lujo se encuentra con la sostenibilidad.
-                        nuestro equipo está disponible todos los días y a todas horas para ayudarte con cualquier detalle de tu estancia.
-                    </p>
-                    <h3>contacto</h3>
-                    <p className="Booking-infoTexto">
-                        <span className="material-symbols-outlined">location_on</span>
-                        Cala Xarraca, Ibiza<br />
-                        <span className="material-symbols-outlined">call</span>
-                        +34 871 008 875<br />
-                        <span className="material-symbols-outlined">mail</span>
-                        reservations-ibiza@sixsenses.com
-                    </p>
-
-                </div>
-            </div>
-
-
+            <FooterBooking />
         </>
     );
 }
