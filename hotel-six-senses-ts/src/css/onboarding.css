@@ -1,0 +1,45 @@
+.Onboarding {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  overflow: hidden;
+}
+.Onboarding-title {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+}
+.Onboarding-h1 {
+  color: #333;
+  font-size: 10rem;
+}
+
+.Onboarding-h2 {
+  color: #333;
+  font-size: 5.4rem;
+}
+
+.Onboarding-span {
+  display: inline-block;
+}
+
+.Home-h1,
+.Onboarding-h1 {
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .Onboarding-title {
+    margin-bottom: 12rem;
+  }
+  .Onboarding-h1 {
+    display: block;
+    font-size: 3.4rem;
+  }
+
+  .Onboarding-h2 {
+    font-size: 2.4rem;
+  }
+}
