@@ -21,7 +21,7 @@ const spansVariants: Variants = {
 const layoutTransition: Transition = {
     type: "tween",
     ease: "easeInOut",
-    duration: 2.5, // Esto controla la lentitud del VIAJE al Home
+    duration: 3.4, // Esto controla la lentitud del VIAJE al Home
 };
 
 export const Onboarding = () => {
