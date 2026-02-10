@@ -21,12 +21,16 @@ const spansVariants: Variants = {
 const layoutTransition: Transition = {
     type: "tween",
     ease: "easeInOut",
-    duration: 3.4, // Esto controla la lentitud del VIAJE al Home
+    duration: 4.2, // Esto controla la lentitud del VIAJE al Home
 };
 
 export const Onboarding = () => {
     return (
-        <div className="Onboarding">
+        <motion.div className="Onboarding" key='onboarding'
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0.4 }}
+            transition={{ duration: 0.8 }}
+        >
             <div className="Onboarding-title">
                 <motion.h1
                     layoutId="main-title"
@@ -61,6 +65,6 @@ export const Onboarding = () => {
                     <i>Ibiza</i>{" "}
                 </motion.h2>
             </div>
-        </div>
+        </motion.div>
     );
 };
