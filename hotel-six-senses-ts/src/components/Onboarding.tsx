@@ -57,7 +57,7 @@ export const Onboarding = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
                         delay: 2.2,
-                        duration: 0.8,
+                        duration: 0.9,
                         ease: "easeOut",
                         layout: layoutTransition,
                     }}
