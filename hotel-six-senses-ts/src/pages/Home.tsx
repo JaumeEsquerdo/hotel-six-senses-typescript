@@ -3,8 +3,11 @@ import { Onboarding } from "@/components/Onboarding.tsx";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, type Transition } from "framer-motion";
 
+// fuera del componente para que se mantenga si no recarga la web
+let hasPlayedOnboarding = false;
+
 const Home = () => {
-    const [showHome, setShowHome] = useState(false);
+    const [showHome, setShowHome] = useState(hasPlayedOnboarding);
 
     const layoutTransition: Transition = {
         type: "tween",
@@ -14,11 +17,17 @@ const Home = () => {
 
     //efecto delay para cambiar de onboarding inicial al home
     useEffect(() => {
-        const onboardingDelay = setTimeout(() => {
-            setShowHome(true);
-        }, 4000);
+        let onboardingDelay: ReturnType<typeof setTimeout> | undefined
+        if (!hasPlayedOnboarding) {
 
-        return () => clearTimeout(onboardingDelay);
+            onboardingDelay = setTimeout(() => {
+                setShowHome(true);
+                hasPlayedOnboarding = true;
+            }, 4000);
+        }
+        return () => {
+            if (onboardingDelay) clearTimeout(onboardingDelay);
+        }
     }, []);
 
     return (
