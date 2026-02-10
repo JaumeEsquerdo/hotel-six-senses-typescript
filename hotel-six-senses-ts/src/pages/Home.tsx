@@ -12,7 +12,7 @@ const Home = () => {
     const layoutTransition: Transition = {
         type: "tween",
         ease: "easeInOut",
-        duration: 0.7, // Esto controla la lentitud del VIAJE al Home
+        duration: 1.2, // Esto controla la lentitud del VIAJE al Home
     };
 
     //efecto delay para cambiar de onboarding inicial al home
@@ -32,15 +32,17 @@ const Home = () => {
 
     return (
         <>
-            <AnimatePresence mode="wait">
+            <AnimatePresence
+                mode="wait"
+            >
                 {!showHome ? (
                     <Onboarding />
                 ) : (
                     <motion.div className="Home-img" key='home'
-                        initial={{ opacity: 0.4 }}
+                        initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0.2 }}
-                        transition={{ duration: 0.8 }}
+                        transition={{ type: 'tween', ease: 'easeIn', duration: 2 }}
                     >
                         <div className="Home-title">
                             <motion.h1

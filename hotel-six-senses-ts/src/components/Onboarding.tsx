@@ -14,22 +14,22 @@ const spansVariants: Variants = {
     visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.6, ease: "easeOut" },
+        transition: { duration: 0.9, ease: "easeOut" },
     },
 };
 
 const layoutTransition: Transition = {
     type: "tween",
-    ease: "easeInOut",
-    duration: 4.2, // Esto controla la lentitud del VIAJE al Home
+    ease: "easeIn",
+    duration: 0.8, // Esto controla la lentitud del VIAJE al Home
 };
 
 export const Onboarding = () => {
     return (
         <motion.div className="Onboarding" key='onboarding'
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0.4 }}
-            transition={{ duration: 0.4 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6 }}
         >
             <div className="Onboarding-title">
                 <motion.h1
@@ -57,7 +57,7 @@ export const Onboarding = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
                         delay: 2.2,
-                        duration: 0.6,
+                        duration: 0.8,
                         ease: "easeOut",
                         layout: layoutTransition,
                     }}
