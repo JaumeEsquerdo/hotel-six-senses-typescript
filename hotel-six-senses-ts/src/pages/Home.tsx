@@ -12,7 +12,7 @@ const Home = () => {
     const layoutTransition: Transition = {
         type: "tween",
         ease: "easeInOut",
-        duration: 1.2, // Esto controla la lentitud del VIAJE al Home
+        duration: 1.2, // Esto controla la lentitud del VIAJE del texto al Home
     };
 
     //efecto delay para cambiar de onboarding inicial al home
@@ -42,7 +42,7 @@ const Home = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0.2 }}
-                        transition={{ type: 'tween', ease: 'easeIn', duration: 2 }}
+                        transition={{ type: 'tween', ease: 'easeIn', duration: 0.4 }}
                     >
                         <div className="Home-title">
                             <motion.h1
