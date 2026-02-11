@@ -28,7 +28,7 @@ export const Onboarding = () => {
     return (
         <motion.div className="Onboarding" key='onboarding'
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0.08 }}
+            exit={{ opacity: 0.02 }}
             transition={{ duration: 0.8 }}
         >
             <div className="Onboarding-title">
