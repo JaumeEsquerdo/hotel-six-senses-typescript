@@ -53,10 +53,16 @@ const Instalaciones = () => {
 
                         <ParallaxImage srcDefault={inst.default} srcHover={inst.hover} />
 
-                        <div className="Image-legend">
+                        <motion.div className="Image-legend"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            /* el margin -20px en viewport es para q se retrase la animación de `whileInView` hasta entrar 20px  */
+                            viewport={{ once: true, margin: '-40px' }}
+                            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
+                        >
                             <span className="Legend-title">{inst.name} </span>
                             <p className="Legend-description">{inst.description} </p>
-                        </div>
+                        </motion.div>
                     </div>
 
                 ))}
